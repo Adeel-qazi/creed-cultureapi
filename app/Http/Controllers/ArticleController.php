@@ -58,7 +58,6 @@ class ArticleController extends Controller
                     $image = $request->file('image');
                     $imageName = time().".".$image->getClientOriginalExtension();
                     $image->move(public_path("uploads/articles/"),$imageName);
-
                     $validatedData['image'] = "uploads/articles/" . $imageName;
                    }
 
@@ -122,17 +121,9 @@ class ArticleController extends Controller
                     $image = $request->file('image');
                     $imageName = time().".".$image->getClientOriginalExtension();
                     $image->move(public_path("uploads/blogs/"),$imageName);
-
                     $validatedData['image'] = "uploads/articles/" . $imageName;;
-
-                   }else{
-                    $validatedData['image'] = "uploads/articles/" . $request->existing_image;
-
                    }
-
                 $article->update($validatedData);
-
-
                 return response()->json([
                     'status' => true,
                     'message' => 'Article updated successfully',

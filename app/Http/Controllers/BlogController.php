@@ -125,17 +125,9 @@ class BlogController extends Controller
                     $image = $request->file('image');
                     $imageName = time().".".$image->getClientOriginalExtension();
                     $image->move(public_path("uploads/blogs/"),$imageName);
-
                     $validatedData['image'] = "uploads/blogs/". $imageName;
-
-                   }else{
-                    $validatedData['image'] = "uploads/blogs/". $request->existing_image;
-
                    }
-
                 $blog->update($validatedData);
-
-
                 return response()->json([
                     'status' => true,
                     'message' => 'Blog updated successfully',
