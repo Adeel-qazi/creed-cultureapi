@@ -61,8 +61,8 @@ class BlogController extends Controller
                     $image = $request->file('image');
                     $imageName = time().".".$image->getClientOriginalExtension();
                     $image->move(public_path("uploads/blogs/"),$imageName);
-        
-                    $validatedData['image'] = $imageName;
+
+                    $validatedData['image'] = "uploads/blogs/". $imageName;
                    }
 
                 $blog = $user->blogs()->create($validatedData);
@@ -85,7 +85,7 @@ class BlogController extends Controller
             ], 401);
         }
 
-       
+
     }
 
     /**
@@ -113,7 +113,7 @@ class BlogController extends Controller
      */
     public function update(UpdateBlogRequest $request, Blog $blog)
     {
-       
+
         $validatedData = $request->validated();
 
         if (auth()->check()) {
@@ -125,12 +125,12 @@ class BlogController extends Controller
                     $image = $request->file('image');
                     $imageName = time().".".$image->getClientOriginalExtension();
                     $image->move(public_path("uploads/blogs/"),$imageName);
-        
-                    $validatedData['image'] = $imageName;
-        
+
+                    $validatedData['image'] = "uploads/blogs/". $imageName;
+
                    }else{
-                    $validatedData['image'] = $request->existing_image;
-       
+                    $validatedData['image'] = "uploads/blogs/". $request->existing_image;
+
                    }
 
                 $blog->update($validatedData);

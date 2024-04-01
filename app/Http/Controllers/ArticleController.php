@@ -58,8 +58,8 @@ class ArticleController extends Controller
                     $image = $request->file('image');
                     $imageName = time().".".$image->getClientOriginalExtension();
                     $image->move(public_path("uploads/articles/"),$imageName);
-        
-                    $validatedData['image'] = $imageName;
+
+                    $validatedData['image'] = "uploads/articles/" . $imageName;
                    }
 
                 $article = $user->articles()->create($validatedData);
@@ -82,7 +82,7 @@ class ArticleController extends Controller
             ], 401);
         }
 
-       
+
     }
 
     /**
@@ -110,7 +110,7 @@ class ArticleController extends Controller
      */
     public function update(UpdateArticleRequest $request, Article $article)
     {
-       
+
         $validatedData = $request->validated();
 
         if (auth()->check()) {
@@ -122,12 +122,12 @@ class ArticleController extends Controller
                     $image = $request->file('image');
                     $imageName = time().".".$image->getClientOriginalExtension();
                     $image->move(public_path("uploads/blogs/"),$imageName);
-        
-                    $validatedData['image'] = $imageName;
-        
+
+                    $validatedData['image'] = "uploads/articles/" . $imageName;;
+
                    }else{
-                    $validatedData['image'] = $request->existing_image;
-       
+                    $validatedData['image'] = "uploads/articles/" . $request->existing_image;
+
                    }
 
                 $article->update($validatedData);
