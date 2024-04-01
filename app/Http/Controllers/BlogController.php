@@ -122,6 +122,7 @@ class BlogController extends Controller
             if ($user && $user->role == 'admin') {
 
                 if(!empty($request->hasFile('image'))){
+                    if (!empty($blog->image) && file_exists(public_path('storage/' . $blog->image))) unlink(public_path($blog->image));
                     $image = $request->file('image');
                     $imageName = time().".".$image->getClientOriginalExtension();
                     $image->move(public_path("uploads/blogs/"),$imageName);

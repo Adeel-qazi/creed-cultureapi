@@ -118,6 +118,7 @@ class ArticleController extends Controller
             if ($user && $user->role == 'admin') {
 
                 if(!empty($request->hasFile('image'))){
+                    if (!empty($article->image) && file_exists(public_path('storage/' . $article->image))) unlink(public_path($article->image));
                     $image = $request->file('image');
                     $imageName = time().".".$image->getClientOriginalExtension();
                     $image->move(public_path("uploads/blogs/"),$imageName);
