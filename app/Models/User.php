@@ -19,6 +19,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
 
+    
      public function setPasswordAttribute($value)
      {
          $this->attributes['password'] = Hash::make($value);
@@ -27,6 +28,16 @@ class User extends Authenticatable
      public function blogs() {
         return $this->hasMany(Blog::class, 'user_id','id');
     }
+
+    public function comments() {
+        return $this->hasMany(Comment::class, 'user_id','id');
+    }
+
+    public function likes() {
+        return $this->hasMany(Like::class, 'user_id','id');
+    }
+
+
 
     public function articles() {
         return $this->hasMany(Article::class, 'user_id','id');
